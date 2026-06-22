@@ -1,0 +1,163 @@
+/* 1. 設定全域基本樣式與背景漸層 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    margin: 0;
+    padding: 40px 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #1e293b; /* 專業感核心：不用純黑，改用深藍灰色 */
+
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 2. 搜尋區域外殼（卡片式設計） */
+#searchArea {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px); /* 讓卡片帶有一點玻璃擬態的霧面感 */
+    padding: 32px;
+    border-radius: 16px; /* 更圓潤的弧度顯得現代 */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05); /* 精細的雙層柔和陰影 */
+    width: 100%;
+    max-width: 420px;
+}
+
+#searchArea h1 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+#searchArea p {
+    margin: 0 0 20px 0;
+    color: #64748b; /* 次要文字用中灰色 */
+    font-size: 14px;
+}
+
+/* 3. 搜尋列排版 */
+#searchBar {
+    display: flex;
+    gap: 12px;
+}
+
+/* 4. 輸入框升級 */
+#cityInput {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease; /* 讓聚焦時的外框變化變柔和 */
+}
+
+/* 輸入框被點擊（聚焦）時的專業藍色外框 */
+#cityInput:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+/* 5. 按鈕升級 */
+#searchBtn {
+    background-color: #0ea5e9; /* 亮眼的科技藍 */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* 滑鼠移上去按鈕的微互動（變深一點、微微浮起） */
+#searchBtn:hover {
+    background-color: #0284c7;
+    transform: translateY(-1px);
+}
+
+/* 6. 天氣資訊卡片升級 */
+#weatherInfo {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    margin-top: 24px; /* 縮短原本過寬的間距，讓視覺更緊湊 */
+    box-sizing: border-box;
+}
+
+#weatherInfo h2 {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 700;
+    border-left: 4px solid #0ea5e9; /* 新增左側裝飾條，瞬間有了質感 */
+    padding-left: 10px;
+}
+
+/* 讓每一行天氣資訊看起來像條列式清單 */
+#weatherInfo {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 40px; /* 加大內邊距，讓大卡片更有呼吸感 */
+    border-radius: 24px; /* 弧度跟著加大，更顯大氣 */
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08); /* 換上更柔和的大卡片陰影 */
+    margin-top: 0; 
+    box-sizing: border-box;
+
+    /* 關鍵修改：預設先完全隱藏，因為還沒搜尋 */
+    display: none; 
+    
+    /* 轉場動畫：讓卡片等一下出現時，有漸漸放大的高級感 */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 當 #weatherInfo 被 JavaScript 貼上 .active 標籤時的寬大華麗樣式 */
+#weatherInfo.active {
+    display: block; /* 讓卡片現形 */
+    width: 90%;     /* 寬度擴展到全螢幕的 90% */
+    max-width: 600px; /* 最大放大到 600px（原本只有 420px），視覺更震撼 */
+    
+    /* 置中密技：因為 body 已經有 flex 且 align-items: center，
+       這裡卡片就會自動在全螢幕的最正中央水平置中！ */
+}
+
+/* 移除最後一行的底線 */
+#weatherInfo p:last-child {
+    border-bottom: none;
+}
+
+/* 幫天氣圖示加上濾鏡陰影，解決白色互疊看不清的問題 */
+#weatherIcon {
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+/* 返回按鈕的專業樣式 */
+#backBtn {
+    background-color: transparent; /* 背景透明 */
+    color: #64748b; /* 內斂的中灰色字體 */
+    border: 1px solid #cbd5e1; /* 淡淡的灰色外框 */
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%; /* 寬度撐滿卡片，看起來更大氣 */
+    margin-top: 24px; /* 與上面的風速拉開距離 */
+    transition: all 0.2s ease;
+}
+
+/* 滑鼠移到返回按鈕上的微互動 */
+#backBtn:hover {
+    background-color: #f8fafc; /* 變成極淺灰 */
+    color: #1e293b; /* 字體顏色變深 */
+    border-color: #94a3b8;
+}

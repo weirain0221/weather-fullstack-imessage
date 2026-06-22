@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather App</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        <div id="searchArea">
+            <h1>天氣即時報</h1>
+            <p>請選擇城市</p>
+
+            <div id="searchBar">
+                <input id="cityInput" placeholder="Ex: Taichung">
+                <button id="searchBtn">Search</button>
+            </div>
+            
+        </div>
+        
+        <div id="weatherInfo">
+            <h2>天氣資訊</h2>
+            <div style="text-align: center;">
+                <img id="weatherIcon" src="" alt="天氣圖示" style="display: none;">
+            </div>
+            <p>溫度：<span id="tempValue"></span> °C</p>
+            <p>體感溫度：<span id="feels_like_Value"></span> °C</p>
+            <p>濕度：<span id="humidityValue"></span> %</p>
+            <p>風速：<span id="windValue"></span> %</p>
+            <button id="backBtn">返回搜尋</button>
+        </div>
+        <script src="script.js"></script>
+        
+    </body>
+</html>
