@@ -1,29 +1,29 @@
-# 🌤️ 全端天氣即時報與自動化 iMessage 推播系統
+# ⛅ Weather Fullstack iMessage Notification System
 
-本專案是一個兼具現代化前端網頁視覺、輕量級後端微服務，並深度整合 macOS 系統原生推播功能的「前後端分離」全端天氣應用。使用者可透過優雅的網頁介面即時查詢全球城市天氣，系統除動態呈現即時氣象數據與視覺主題外，後端將同步觸發自動化腳本，將氣象資訊即時推播至指定之 iPhone。
+這是一個結合前端網頁、後端 Flask API 以及 macOS 自動化指令（AppleScript）的全端天氣查詢與 iMessage 自動通知系統。
+
+當使用者在網頁上查詢指定城市的天氣時，後端會即時向 OpenWeatherMap 撈取最新氣象資料，並透過系統級指令，自動發送精美的天氣報告簡訊至開發者的 iPhone 手機上。
 
 ---
 
-## 🚀 技術亮點與核心架構
+## 🌟 專案亮點與技術優化
 
-本專案非單純的前端 API 串接，而是完整的**前後端分離（Frontend-Backend Separation）**架構，具備以下軟體工程實踐價值：
-
-1. **前後端分離架構**：前端（HTML5/CSS3/JavaScript）負責視覺與互動；後端（Python Flask）建構輕量級微服務，負責資料路由與核心邏輯。
-2. **跨網域資源共享（CORS）處理**：後端成功配置 `Flask-CORS` 協定，安全地允許跨來源網頁的異步數據交換。
-3. **異步資料請求（Asynchronous JavaScript）**：前端利用 `Fetch API`、`Promises` 進行非同步 POST 請求，並深度結合 `navigator.geolocation` 實作使用者地理位置自動感測。
-4. **macOS 系統級整合（AppleScript）**：後端利用 Python `os` 模組動態呼叫 macOS 內建之原生 AppleScript，將網頁觸發之行為轉化為 Apple 專屬之 **iMessage (藍色泡泡)** 自動化推播。
-5. **現代化響應式 UI/UX**：採用 Glassmorphism（玻璃擬態）視覺風格，支援 `keydown` 鍵盤優化監聽，並根據 OpenWeatherMap 回傳之天氣狀況狀態碼，實作動態漸層背景（Dynamic Linear Gradient）切換。
+1. **全端架構整合**：前端（HTML/CSS/JS）透過 Fetch API 與後端（Python Flask）進行跨網域（CORS）非同步連線。
+2. **資訊安全（資安優化）**：採用業界標準的 `python-dotenv` 管理敏感憑證（API Key、Apple ID）。專案代碼保持 Public 公開，但核心金鑰與私人隱私完美抽離，絕不暴露於程式碼中。
+3. **即時數據動態重新整理 (Cache Busting)**：針對 OpenWeatherMap 免費版 API 的快取機制進行優化，在請求網址中動態引入時間戳記（Timestamp），強迫伺服器回傳當下最精準、不延遲的即時氣溫與體感溫度。
+4. **macOS 系統自動化**：後端整合 macOS 內建的 `osascript` 驅動 AppleScript，實現免付費、無須第三方簡訊平台的 iMessage 自動發送機制。
 
 ---
 
 ## 📂 專案目錄結構
 
-```weather-fullstack-imessage
+```text
+weather-fullstack-imessage/
 ├── weather_app/          # 前端網頁專案 (Frontend)
 │   ├── index.html        # 網頁結構與 Glassmorphism 卡片
 │   ├── script.js         # 地理定位、Fetch 非同步請求與動態變色邏輯
 │   └── style.css         # 霧面視覺、轉場動畫與響應式排版
-│
-└── weather_spider/       # 後端微服務專案 (Backend)
-    ├── venv/             # Python 虛擬環境
-    └── weather_spider.py # Flask API 伺服器與 AppleScript 推播引擎
+└── weather_spider/       # 後端爬蟲與伺服器專案 (Backend)
+    ├── .env              # 敏感憑證管理 (已加入 .gitignore，本地自行建立)
+    ├── weather_spider.py # Flask API 與 macOS 原生 AppleScript 排程引擎
+    └── venv/             # Python 獨立虛擬環境
