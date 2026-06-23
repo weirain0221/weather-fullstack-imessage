@@ -1,17 +1,20 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
+import time
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-API_KEY = "5ba874a80044439c2660cd9411822417"
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 def send_imessage(msg):
-    # ⚠️ 請把下面的引號內換成「你自己的 Apple ID (Email)」或「綁定 iMessage 的手機號碼」
-    # 因為是傳給自己，所以接收者就是你自己
-    MY_APPLE_ID = "chenboss0221@gmail.com" 
+    # 把下面的引號內換成「你自己的 Apple ID (Email)」或「綁定 iMessage 的手機號碼」
+    MY_APPLE_ID = os.getenv("MY_APPLE_ID")
     
     # 用 AppleScript 控制「訊息」App 的指令
     script = f'tell application "Messages" to send "{msg}" to buddy "{MY_APPLE_ID}"'
@@ -24,7 +27,8 @@ def get_weather():
     req_data = request.get_json()
     city = req_data.get('city', 'Taipei')
 
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric&lang=zh_tw"
+    timestamp = int(time.time())
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric&lang=zh_tw&v={timestamp}"
     response = requests.get(url)
 
     if response.status_code == 200:
