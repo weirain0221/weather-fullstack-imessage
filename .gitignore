@@ -1,3 +1,4 @@
 weather_spider/venv/
 weather_spider/.env
 .DS_Store
+.vscode/
