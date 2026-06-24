@@ -41,7 +41,7 @@ def get_weather():
         weather_desc = weather_data["weather"][0]["description"]
         
         # 2. 組裝訊息文字（注意：iMessage 的換行是用 \n）
-        apple_msg = f"陳任任天氣報：網頁有人查詢了【{city}】！\n⛅ 天氣：{weather_desc}\n Temp：{temp}°C (體感 {feels_like}°C)\n💧 濕度：{humidity}%"
+        apple_msg = f"天氣即時報：網頁有人查詢了【{city}】！\n⛅ 天氣：{weather_desc}\n Temp：{temp}°C (體感 {feels_like}°C)\n💧 濕度：{humidity}%"
         
         # 3. 觸發 Mac 發送 iMessage
         print(f"🚀 正在透過 Mac 訊息 App 發送 iMessage 通知到你的 iPhone...")
